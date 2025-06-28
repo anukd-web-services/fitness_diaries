@@ -1,0 +1,23 @@
+{
+  "name": "fitness_diaries",
+  "version": "1.0.0",
+  "description": "### 🔐 **Authentication**",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anukd-web-services/fitness_diaries.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anukd-web-services/fitness_diaries/issues"
+  },
+  "homepage": "https://github.com/anukd-web-services/fitness_diaries#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
