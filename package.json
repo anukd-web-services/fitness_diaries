@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/anukd-web-services/fitness_diaries#readme",
   "dependencies": {
+    "cookie-session": "^2.1.0",
+    "ejs-mate": "^4.0.0",
     "express": "^5.1.0"
   }
 }
