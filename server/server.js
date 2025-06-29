@@ -1,36 +1,40 @@
 const express = require("express");
 const app = express();
-
-const ejsMate = require("ejs-mate");
 const path = require("path");
 const dotenv = require("dotenv");
+
+// Load environment variables
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
+// Database connection
 const connectDB = require("./config/db");
-connectDB(); // connects MongoDB
+connectDB();
 
+// Session middleware
 const session = require("./config/cookieSession");
+app.use(session);
 
-// Set up EJS
+// View engine (if using EJS)
+const ejsMate = require("ejs-mate");
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Middleware
-app.use(session);
+// Static files
 app.use(express.static(path.join(__dirname, "public")));
-
-// ✅ Serve React build (after public)
 app.use(express.static(path.join(__dirname, "../client/build")));
 
-// ✅ React fallback route (after API and EJS routes)
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// API routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/auth", authRoutes);
 
+// Serve React app ONLY at the root
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
 // Start server
-app.listen(8080, () => {
-  console.log("Listening on port 8080");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
