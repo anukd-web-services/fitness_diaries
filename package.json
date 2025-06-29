@@ -18,11 +18,12 @@
     "concurrently": "^9.2.0",
     "nodemon": "^3.1.10"
   },
-"scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "server": "nodemon server/server.js",
-  "client": "npm start --prefix client",
-  "dev": "concurrently \"npm run server\" \"npm run client\""
-}
-
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm install && npm run build",
+    "start": "node server/server.js"
+  }
 }
