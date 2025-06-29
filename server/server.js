@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
+const authRoutes = require("./routes/authRoutes");
+app.use("/auth", authRoutes);
 
 // Start server
 app.listen(8080, () => {
