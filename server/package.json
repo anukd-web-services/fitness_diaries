@@ -4,14 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "server": "nodemon server/server.js",
-  "client": "npm start --prefix client",
-  "build": "cd client && npm install && npm run build",
-  "start": "node server/server.js",
-  "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "install-all": "npm install && cd client && npm install && cd ../server && npm install && cd .."
-},
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
