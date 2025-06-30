@@ -23,6 +23,7 @@ app.set("views", path.join(__dirname, "views"));
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.urlencoded({ extended: true }));
 
 // API routes
 const authRoutes = require("./routes/authRoutes");
