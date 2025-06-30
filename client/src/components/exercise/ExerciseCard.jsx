@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ExerciseCard.css';
+import '../../styles/ExerciseCard.css';
 
 const ExerciseCard = ({
   name,
@@ -43,8 +43,8 @@ const ExerciseCard = ({
         </div>
 
         <div className="card-buttons">
-          <button className="quick-btn">Start Now</button>
-          <button className="explore-btn">Add to Routine</button>
+          <button className="start-btn">Start Now</button>
+          <button className="addrout-btn">Add to Routine</button>
         </div>
       </div>
     </div>

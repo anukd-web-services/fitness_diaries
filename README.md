@@ -13,7 +13,7 @@
 
 - Overview of:
 
-  - Daily routine
+  - Daily routine - only the day's rotuine 
   - Upcoming workouts
   - Quick stats (e.g. streak, progress)
   - Blog/exercise highlights
