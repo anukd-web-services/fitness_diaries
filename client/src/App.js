@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Exercises from './pages/exercises';
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("/api/hello")
-      .then((res) => setMessage(res.data.message))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
-    <div>
-      <h1>{message}</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/exercises" element={<Exercises />} />
+      </Routes>
+    </Router>
   );
 }
 
