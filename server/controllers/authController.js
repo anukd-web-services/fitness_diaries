@@ -1,7 +1,7 @@
-export function getRegisterPage(req, res) {
+exports.getRegisterPage = function (req, res) {
   res.render("common/auth/register");
 };
 
-export function getLoginPage(req, res) {
+exports.getLoginPage = function (req, res) {
   res.render("common/auth/login");
 };

@@ -24,7 +24,6 @@ app.set("views", path.join(__dirname, "../server/views"));
 app.use(authRoutes);
 
 // ✅ Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+app.listen(8080, () => {
+  console.log(`✅ Server running at http://localhost:8080`);
 });
