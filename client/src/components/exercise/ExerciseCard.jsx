@@ -21,13 +21,15 @@ const ExerciseCard = ({
             <span className="card-headline-text">{name}</span>
           </div>
           <div className="card-actions">
-            <button className="add-button">Add</button>
+            <button className="add-button">READ MORE</button>
           </div>
         </div>
-
+        
+        {/*
         <div className="card-description">
           <p>{description}</p>
-        </div>
+        </div>*/}
+  
 
         <hr />
 
@@ -40,11 +42,7 @@ const ExerciseCard = ({
             <span className="info-title">Calories</span>
             <span className="info-value">{calories} kcal</span>
           </div>
-          <div>
-  <span className="info-title">Difficulty</span>
-  <span className="info-value">{difficulty || "N/A"}</span>
-</div>
-
+          
         </div>
 
         <div className="card-buttons">
