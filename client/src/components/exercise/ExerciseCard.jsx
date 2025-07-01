@@ -3,6 +3,7 @@ import '../../styles/ExerciseCard.css';
 
 const ExerciseCard = ({
   name,
+  description,
   imageUrl,
   duration,
   calories,
@@ -20,9 +21,12 @@ const ExerciseCard = ({
             <span className="card-headline-text">{name}</span>
           </div>
           <div className="card-actions">
-                <button className="add-button">Add</button>
-            </div>
+            <button className="add-button">Add</button>
+          </div>
+        </div>
 
+        <div className="card-description">
+          <p>{description}</p>
         </div>
 
         <hr />
@@ -37,9 +41,10 @@ const ExerciseCard = ({
             <span className="info-value">{calories} kcal</span>
           </div>
           <div>
-            <span className="info-title">Level</span>
-            <span className="info-value">{difficulty}</span>
-          </div>
+  <span className="info-title">Difficulty</span>
+  <span className="info-value">{difficulty || "N/A"}</span>
+</div>
+
         </div>
 
         <div className="card-buttons">

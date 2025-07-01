@@ -1,25 +1,39 @@
-import React from 'react';
-import ExerciseCard from '../../components/exercise/ExerciseCard';
+import React, { useEffect, useState } from "react";
+import ExerciseCard from "../../components/exercise/ExerciseCard";
+import "../../styles/ExerciseCard.css";
 
-const Exercises = () => {
+const ExercisesPage = () => {
+  const [exercises, setExercises] = useState([]);
+
+  useEffect(() => {
+    const fetchExercises = async () => {
+      try {
+        const res = await fetch("/api/exercises");
+        const data = await res.json();
+        setExercises(data);
+      } catch (err) {
+        console.error("Failed to fetch exercises:", err);
+      }
+    };
+
+    fetchExercises();
+  }, []);
+
   return (
-    <div>
-      <ExerciseCard
-        name="Push Ups"
-        duration={10}
-        calories={100}
-        difficulty="Beginner"
-        imageUrl="https://images.pexels.com/photos/3775164/pexels-photo-3775164.jpeg"
-      />
-      <ExerciseCard
-        name="Squats"
-        duration={15}
-        calories={120}
-        difficulty="Intermediate"
-        imageUrl="https://images.pexels.com/photos/6339655/pexels-photo-6339655.jpeg"
-      />
+    <div className="exercise-grid">
+      {exercises.map((exercise) => (
+        <ExerciseCard
+          key={exercise._id}
+          name={exercise.name}
+          description={exercise.description}
+          imageUrl={exercise.imageUrl}
+          duration={exercise.duration}
+          calories={exercise.calories || 100}
+          difficulty={exercise.difficulty}
+        />
+      ))}
     </div>
   );
 };
 
-export default Exercises;
+export default ExercisesPage;

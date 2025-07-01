@@ -3,12 +3,14 @@ const app = express();
 const path = require("path");
 const dotenv = require("dotenv");
 
+
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
 // Database connection
 const connectDB = require("./config/db");
 connectDB();
+
 
 // Session middleware
 const session = require("./config/cookieSession");
@@ -28,6 +30,10 @@ app.use(express.urlencoded({ extended: true }));
 // API routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/auth", authRoutes);
+
+const exerciseRoutes = require("./routes/exerciseRoutes");
+app.use("/api/exercises", exerciseRoutes);
+
 
 // Serve React app ONLY at the root
 app.get("/", (req, res) => {
