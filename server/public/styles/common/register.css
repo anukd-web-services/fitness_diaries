@@ -12,16 +12,17 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(90deg, #4f4040, #e34d4d);
+  background: linear-gradient(90deg, #e2e2e2, #2d2424);
 }
 
 .container {
   position: relative;
   width: 850px;
   height: 550px;
-  background: #4f4040;
+  background: #fff;
   border-radius: 30px;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  /*overflow: hidden;*/
 }
 
 .form-box {
@@ -29,11 +30,17 @@ body {
   right: 0;
   width: 50%;
   height: 100%; 
-  background-color: rgb(19, 104, 50);
+  background-color: #fff;
   display: flex;
   align-items: center;
   color: #333;
   text-align: center;
+  padding: 40px;
+  z-index: 1;
+}
+
+.form-box.register {
+  visibility: hidden;
 }
 
 form {
@@ -52,7 +59,7 @@ form {
 
 .input-box input {
   width: 100%;
-  padding: 13px;
+  padding: 13px 50px 13px 20px;
   background: #eee;
   border-radius: 8px;
   border: none;
@@ -74,4 +81,88 @@ form {
   transform: translateY(-50%);
   font-size: 20px;
   color: #888;
+}
+
+.forgot-link{
+  margin: -15px 0 15px;
+}
+
+.forgot-link a {
+  font-size: 14.5px;
+  color: #333;
+  text-decoration: none;
+}
+
+.btn {
+  width: 100%;
+  height: 48px;
+  background:  #2d2424;
+  border-radius: 8px;
+  box-shadow: 0 0 010px rgba(0, 0, 0, .1);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.container p {
+  font-size: 14.5px;
+  margin: 15px 0;
+}
+
+.social-icons a {
+  display: inline-flex;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 24px;
+  color: #333;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.toggle-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-box::before {
+  content: '';
+  position: absolute;
+  left: -250%;
+  width: 300%;
+  height: 100%;
+  background:#2d2424;
+  border-radius: 150px;
+  z-index: 2;
+}
+
+.toggle-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.toggle-panel p {
+  margin-bottom: 20px;
+}
+
+.toggle-panel .btn {
+  width: 160px;
+  height: 46px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  box-shadow: none;
+}
+
+.toggle-panel.toggle-right {
+  right: -50%;
 }
