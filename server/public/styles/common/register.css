@@ -15,6 +15,15 @@ body {
   background: linear-gradient(90deg, #e2e2e2, #2d2424);
 }
 
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 999;
+}
+
 .container {
   position: relative;
   width: 850px;
