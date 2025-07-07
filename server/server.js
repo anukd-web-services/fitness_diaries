@@ -41,7 +41,7 @@ app.use("/api/exercises", exerciseRoutes); // e.g. /api/exercises
 const clientBuildPath = path.join(__dirname, "../client/build/index.html");
 
 app.get("/exercises", (_req, res) => res.sendFile(clientBuildPath));
-// Add more React‑handled paths as needed:
+app.get("/cards", (_req, res) => res.sendFile(clientBuildPath));
 app.get("/dashboard", (_req, res) => res.sendFile(clientBuildPath));
 // app.get("/profile/:id", (_req, res) => res.sendFile(clientBuildPath));
 
