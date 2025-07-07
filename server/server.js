@@ -11,7 +11,6 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 const connectDB = require("./config/db");
 connectDB();
 
-
 // Session middleware
 const session = require("./config/cookieSession");
 app.use(session);
