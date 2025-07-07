@@ -60,3 +60,11 @@
 - (Optional: Video or GIF demo support)
 
 ---
+
+## **Dashboard** ##
+Day Streak
+Points
+Reminders 
+Graph (Exercises Done...etc etc)
+
+
