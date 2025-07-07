@@ -1,0 +1,28 @@
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #332929 !important;
+  color: white !important;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar .link-text {
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .link-text {
+  opacity: 0;
+  display: none;
+}
+
+.sidebar .nav-link {
+  color: white !important;
+}
+
+.sidebar .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}

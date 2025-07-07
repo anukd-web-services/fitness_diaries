@@ -49,11 +49,6 @@ app.get("/dashboard", (_req, res) => res.sendFile(clientBuildPath));
 app.get("/", (_req, res) => res.render("home")); // your EJS home page
 app.get("/auth/login", (_req, res) => res.render("login")); // your EJS login page
 
-// ─── 404 handler (no wildcard) ──────────────────────────────
-app.use((req, res) => {
-  res.status(404).render("404"); // create views/404.ejs
-});
-
 // ─── Start server ───────────────────────────────────────────
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
