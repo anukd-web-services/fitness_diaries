@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Tooltip } from "bootstrap"; // NEW: import Tooltip module directly
 import "../../styles/sidebar.css"; // Ensure this path is correct
 
 export default function Sidebar({ isCollapsed }) {
@@ -7,13 +8,20 @@ export default function Sidebar({ isCollapsed }) {
 
   // Initialize Bootstrap tooltips on load & when collapsed state changes
   useEffect(() => {
-    const tooltipTriggerList = Array.from(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
     );
-    tooltipTriggerList.forEach((el) => new window.bootstrap.Tooltip(el));
+
+    const tooltipInstances = Array.from(tooltipTriggerList).map(
+      (el) => new Tooltip(el)
+    );
+
+    // Clean up tooltips when component unmounts or updates
+    return () => {
+      tooltipInstances.forEach((tooltip) => tooltip.dispose());
+    };
   }, [isCollapsed]);
 
-  // Define your sidebar links here
   const links = [
     { to: "/dashboard", label: "Home", icon: "house-door" },
     { to: "/dashboard/stats", label: "Stats", icon: "bar-chart" },
@@ -22,7 +30,7 @@ export default function Sidebar({ isCollapsed }) {
 
   return (
     <div className={`sidebar p-3 ${isCollapsed ? "collapsed" : ""}`}>
-      {!isCollapsed && <h4 className="mb-4 text-center">MyApp</h4>}
+      {!isCollapsed && <h4 className="mb-4 text-center">Fitnova</h4>}
 
       <ul className="nav nav-pills flex-column">
         {links.map((link) => (

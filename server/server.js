@@ -1,6 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// server.js  (root of fitness_diaries/server)
-// ─────────────────────────────────────────────────────────────
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
@@ -43,11 +40,6 @@ const clientBuildPath = path.join(__dirname, "../client/build/index.html");
 app.get("/exercises", (_req, res) => res.sendFile(clientBuildPath));
 app.get("/cards", (_req, res) => res.sendFile(clientBuildPath));
 app.get("/dashboard", (_req, res) => res.sendFile(clientBuildPath));
-// app.get("/profile/:id", (_req, res) => res.sendFile(clientBuildPath));
-
-// ─── Server‑rendered pages (EJS examples) ────────────────────
-app.get("/", (_req, res) => res.render("home")); // your EJS home page
-app.get("/auth/login", (_req, res) => res.render("login")); // your EJS login page
 
 // ─── Start server ───────────────────────────────────────────
 const PORT = process.env.PORT || 8080;
