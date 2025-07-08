@@ -1,47 +1,48 @@
 const express = require("express");
-const app = express();
 const path = require("path");
 const dotenv = require("dotenv");
 
+const connectDB = require("./config/db");
+const session = require("./config/cookieSession");
+const authRoutes = require("./routes/authRoutes");
+const exerciseRoutes = require("./routes/exerciseRoutes");
 
-// Load environment variables
+const app = express();
+
+// ─── Load env vars ───────────────────────────────────────────
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
-// Database connection
-const connectDB = require("./config/db");
+// ─── Database ────────────────────────────────────────────────
 connectDB();
 
-
-// Session middleware
-const session = require("./config/cookieSession");
+// ─── Middle‑ware ─────────────────────────────────────────────
 app.use(session);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// View engine (if using EJS)
+// ─── View engine (EJS for server‑rendered pages) ────────────
 const ejsMate = require("ejs-mate");
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Static files
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "../client/build")));
-app.use(express.urlencoded({ extended: true }));
+// ─── Static assets ───────────────────────────────────────────
+app.use(express.static(path.join(__dirname, "public"))); // your public assets
+app.use(express.static(path.join(__dirname, "../client/build"))); // React build assets
 
-// API routes
-const authRoutes = require("./routes/authRoutes");
-app.use("/auth", authRoutes);
+// ─── API routes ──────────────────────────────────────────────
+app.use("/auth", authRoutes); // e.g. /auth/register
+app.use("/api/exercises", exerciseRoutes); // e.g. /api/exercises
 
-const exerciseRoutes = require("./routes/exerciseRoutes");
-app.use("/api/exercises", exerciseRoutes);
+// ─── React routes (serve index.html manually) ───────────────
+const clientBuildPath = path.join(__dirname, "../client/build/index.html");
 
+app.get("/exercises", (_req, res) => res.sendFile(clientBuildPath));
+app.get("/cards", (_req, res) => res.sendFile(clientBuildPath));
+app.get("/dashboard", (_req, res) => res.sendFile(clientBuildPath));
 
-// Serve React app ONLY at the root
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
-
-// Start server
+// ─── Start server ───────────────────────────────────────────
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`Server listening on http://localhost:${PORT}`)
+);
