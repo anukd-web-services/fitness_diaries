@@ -1,81 +1,186 @@
-body {
-    background-color: #121212;
-    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+/* src/styles/ExerciseCategoryCard.css */
+.exercise-card {
+  flex: 0 0 calc(33.33% - 40px);
+  background: #ffffff10;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  margin: 0 20px;
+  overflow: hidden;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
 }
 
-.card {
-    width: 650px;
-    height: 350px;
-    background-color: #1f1f1f;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    margin: 1.2rem;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: flex-start;
+.exercise-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
 }
 
-.card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
-    background-color: #282828;
+.exercise-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ffffff20;
 }
 
-.card-image {
-    width: 38%;
-    height: 100%;
-    object-fit: cover;
-    margin: 0;
-    border-radius: 16px 0 0 16px;
-    filter: brightness(0.9);
-    transition: filter 0.3s ease-in-out;
+.exercise-content {
+  padding: 20px;
 }
 
-.card:hover .card-image {
-    filter: brightness(1.1);
+.exercise-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-.card-content {
-    flex-grow: 1;
-    padding: 25px 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
-    border-radius: 0 16px 16px 0;
+.exercise-description {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 18px;
 }
 
-.card-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #e0e0e0;
-    margin: 0 0 8px 0;
-    line-height: 1.2;
-    transition: color 0.3s ease-in-out;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.exercise-button {
+  padding: 10px 16px;
+  border: none;
+  background: #6c63ff;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
 }
 
-.card:hover .card-title {
-    color: #ffffff;
+.exercise-button:hover {
+  background: #5145cd;
+}
+.carousel-wrapper {
+  padding-top: 20px;
+  background: linear-gradient(135deg, #0a0f1a, #1f1f2e);
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
 }
 
-.card-subtitle {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #ababab;
-    margin: 0 0 15px 0;
+.carousel-heading {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
 }
+
+.carousel-controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 20px;
+  padding: 10px 0 20px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-arrow {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+
+.carousel-arrow.left {
+  position: absolute;
+  left: -50px;
+}
+
+.carousel-arrow.right {
+  position: absolute;
+  right: -50px;
+}
+
+@media (max-width: 1024px) {
+  .exercise-card {
+    flex: 0 0 calc(50% - 40px); /* 2 cards on medium screens */
+    margin: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-scroll {
+    justify-content: center; /* center content */
+  }
+
+  .exercise-card {
+    flex: 0 0 50%;
+    margin: 0 auto;
+  }
+
+  .carousel-arrow.left {
+    left: 10px;
+  }
+
+  .carousel-arrow.right {
+    right: 10px;
+  }
+
+  .carousel-heading {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .exercise-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .exercise-description {
+    text-align: center;
+  }
+
+  .exercise-button {
+    display: block;
+    margin: 10px auto 0 auto;
+  }
+}
+@media (max-width: 480px) {
+  .carousel-scroll {
+    justify-content: flex-start;      /* ⬅ important! */
+    padding-left: 20px;               /* ⬅ this creates the starting space */
+    padding-right: 20px;              /* ⬅ this adds space after last card */
+  }
+
+  .exercise-card {
+    flex: 0 0 85%;
+    margin: 100px 10px;                   /* ⬅ small horizontal spacing */
+  }
+
+  .carousel-arrow.left {
+    left: 8px;
+  }
+
+  .carousel-arrow.right {
+    right: 8px;
+  }
+}
+
+
+

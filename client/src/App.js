@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Exercises from './pages/exe-blog/exercises';
+import Exercises from './pages/exe-blog/Exercises';
 import ExerciseCategories from './pages/exe-blog/ExerciseCategories'; 
 
 // layout that contains the sidebar
