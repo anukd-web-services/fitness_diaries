@@ -11,7 +11,7 @@ const categories = [
   },
   {
     title: "Lower Body",
-    description: "Boost legs and glutes power.",
+    description: "Boost strength in legs and glutes power.",
     image: "https://www.eatthis.com/wp-content/uploads/sites/4/2023/03/muscular-man-leg-press.jpg?quality=82&strip=1",
   },
   {
@@ -21,15 +21,16 @@ const categories = [
   },
   {
     title: "Full Body",
-    description: "Engage all major muscle groups.",
+    description: "Engage all major muscle groups effectively.",
     image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1",
   },
   {
     title: "Cardio",
-    description: "Boost endurance and heart health.",
+    description: "Boost endurance, stamina, and heart health.",
     image: "https://blog.nasm.org/hubfs/steady-state-cardio-blog-image.jpg",
   },
 ];
+
 
 const ExerciseCategories = () => {
   const scrollRef = useRef(null);
