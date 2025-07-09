@@ -6,7 +6,6 @@ const exerciseSchema = new mongoose.Schema({
   difficulty: String,
   duration: Number,
   calories: Number,
-  category: String,
   imageUrl: String
 });
 

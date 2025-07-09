@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import Exercise from '../models/ExerciseModel.js';
+import Exercise from '../models/UpperBody.js';
 
 
 dotenv.config({ path: '../.env' });
