@@ -1,54 +1,62 @@
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Tooltip } from "bootstrap"; // NEW: import Tooltip module directly
-import "../../styles/sidebar.css"; // Ensure this path is correct
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "../../styles/sidebar.css";
 
-export default function Sidebar({ isCollapsed }) {
-  const location = useLocation();
-
-  // Initialize Bootstrap tooltips on load & when collapsed state changes
-  useEffect(() => {
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-
-    const tooltipInstances = Array.from(tooltipTriggerList).map(
-      (el) => new Tooltip(el)
-    );
-
-    // Clean up tooltips when component unmounts or updates
-    return () => {
-      tooltipInstances.forEach((tooltip) => tooltip.dispose());
-    };
-  }, [isCollapsed]);
-
-  const links = [
-    { to: "/dashboard", label: "Home", icon: "house-door" },
-    { to: "/dashboard/stats", label: "Stats", icon: "bar-chart" },
-    { to: "/dashboard/settings", label: "Settings", icon: "gear" },
+//Menu Configuration
+export default function Sidebar(isCollapsed, onProfileClick) {
+  const menuItems = [
+    {
+      label: "Dashboard",
+      icon: "bi-house",
+      subItems: [
+        { label: "Daily Routine", icon: "bi-calendar-day", href: "#" },
+        { label: "Upcoming Routine", icon: "bi-calendar-check", href: "#" },
+        { label: "Quick Stats", icon: "bi-bar-chart-line", href: "#" },
+        { label: "Highlgihts", icon: "bi-star", href: "#" },
+      ],
+    },
+    { label: "Profile", icon: "bi-person", onclick: onProfileClick },
   ];
-
   return (
-    <div className={`sidebar p-3 ${isCollapsed ? "collapsed" : ""}`}>
-      {!isCollapsed && <h4 className="mb-4 text-center">Fitnova</h4>}
-
+    <div
+      className={`sidebar d-flex flex-column p-3 text-white ${
+        isCollapsed ? "collapsed" : ""
+      }`}
+    >
+      <h5 className="text-center mb-4">{!isCollapsed && "Your Dashboard"}</h5>
       <ul className="nav nav-pills flex-column">
-        {links.map((link) => (
-          <li className="nav-item mb-2" key={link.to}>
-            <Link
-              to={link.to}
-              className={`nav-link ${
-                location.pathname === link.to ? "active" : "text-white"
-              }`}
-              data-bs-toggle={isCollapsed ? "tooltip" : ""}
-              data-bs-placement="right"
-              title={isCollapsed ? link.label : ""}
-            >
-              <i className={`bi bi-${link.icon} me-2`} />
-              <span className="link-text">{link.label}</span>
-            </Link>
-          </li>
-        ))}
+        {menuItems.map((item, index) => {
+          <React.Fragment key={index}>
+            <li className="nav-item mb-2">
+              {item.onClick ? (
+                <button
+                  className="btn text-white nav-link"
+                  onClick={item.onclick}
+                >
+                  <i className={`bi ${item.icon} me-2`}></i>
+                </button>
+              ) : (
+                <a
+                  href={item.href || "#"}
+                  className="nav-link text-white fw-bold"
+                >
+                  <i className={`bi ${item.icon} me-2`}></i>
+                  {!isCollapsed && item.label}
+                </a>
+              )}
+              {!isCollapsed &&
+                item.subItems?.map((sub, subIndex) => {
+                  <li className="nav nav-tems ms-4 mb-1" key={subIndex}>
+                    <a href="{sub.href}" className="nav-link text-white small">
+                      <i className={`bi ${sub.icon} me-2`}></i>
+                      {sub.label}
+                    </a>
+                  </li>;
+                })}
+            </li>
+          </React.Fragment>;
+        })}
       </ul>
     </div>
   );
