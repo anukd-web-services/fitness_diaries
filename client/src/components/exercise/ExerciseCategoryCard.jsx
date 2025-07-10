@@ -1,6 +1,5 @@
 // src/components/excercise/ExerciseCategoryCard.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../../styles/ExerciseCategoryCard.css';
 
 const ExerciseCategoryCard = ({ title, description, image }) => {
@@ -10,9 +9,7 @@ const ExerciseCategoryCard = ({ title, description, image }) => {
       <div className="exercise-content">
         <h3 className="exercise-title">{title}</h3>
         <p className="exercise-description">{description}</p>
-        <Link to="/cards">
         <button className="exercise-button">See Exercises</button>
-        </Link>
       </div>
     </div>
   );
