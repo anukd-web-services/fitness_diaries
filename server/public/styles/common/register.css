@@ -213,6 +213,12 @@ form {
   box-shadow: none;
 }
 
+.error-message {
+  color: red;
+  display: none;
+  margin-bottom: 8px;
+}
+
 @media screen and (max-width: 650px) {
   .container {
     height: calc(100vh - 40px);
