@@ -2,7 +2,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-
+  GoogleAuthProvider,
+  signInWithPopup 
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { app } from "./firebase.js";
 
@@ -13,6 +14,7 @@ const registerBtn = document.querySelector('.register-btn');
 const loginBtn = document.querySelector('.login-btn');
 const jsRegisterBtn = document.querySelector('.js-register-btn');
 const jsLoginBtn = document.querySelector('.js-login-btn');
+const googleBtn = document.querySelectorAll('.bxl-google');
 
 
 registerBtn.addEventListener('click', () => {
@@ -99,5 +101,29 @@ jsLoginBtn.addEventListener("click", (e) => {
 
       errorMessage.style.display = 'block';
     });
-
 });
+
+
+//google-login
+googleBtn.forEach((btn) => {
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const googleProvider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      console.log("✅ Google Login successful!");
+      console.log("User ID:", user.uid);
+      console.log("User Email:", user.email);
+
+      alert(`Welcome, ${user.displayName || user.email}!`);
+    } catch (error) {
+      console.error("❌ Google Login error:", error.code, error.message);
+      alert("Google login failed: " + error.message);
+    }
+  });
+});
+
