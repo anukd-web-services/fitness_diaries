@@ -1,48 +1,61 @@
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const connectDB = require("./config/db");
 const session = require("./config/cookieSession");
 const authRoutes = require("./routes/authRoutes");
 const exerciseRoutes = require("./routes/exerciseRoutes");
 
-const app = express();
-
-// ─── Load env vars ───────────────────────────────────────────
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
-// ─── Database ────────────────────────────────────────────────
+const app = express();
+const isProd = process.env.NODE_ENV === "production";
+
+// Connect to DB
 connectDB();
 
-// ─── Middle‑ware ─────────────────────────────────────────────
+// Middlewares
 app.use(session);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ─── View engine (EJS for server‑rendered pages) ────────────
+// EJS
 const ejsMate = require("ejs-mate");
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// ─── Static assets ───────────────────────────────────────────
-app.use(express.static(path.join(__dirname, "public"))); // your public assets
-app.use(express.static(path.join(__dirname, "../client/build"))); // React build assets
+// Public assets
+app.use(express.static(path.join(__dirname, "public")));
 
-// ─── API routes ──────────────────────────────────────────────
-app.use("/auth", authRoutes); // e.g. /auth/register
-app.use("/api/exercises", exerciseRoutes); // e.g. /api/exercises
+// API routes
+app.use("/auth", authRoutes);
+app.use("/api/exercises", exerciseRoutes);
 
-// ─── React routes (serve index.html manually) ───────────────
-const clientBuildPath = path.join(__dirname, "../client/build/index.html");
+// React frontend handling
+if (isProd) {
+  // Serve built static files in production
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  });
+} else {
+  // Proxy to CRA dev server in development
+  app.use(
+    "/",
+    createProxyMiddleware({
+      target: "http://localhost:3000",
+      changeOrigin: true,
+      ws: true,
+      logLevel: "silent",
+    })
+  );
+}
 
-app.get("/exercises", (_req, res) => res.sendFile(clientBuildPath));
-app.get("/cards", (_req, res) => res.sendFile(clientBuildPath));
-app.get("/dashboard", (_req, res) => res.sendFile(clientBuildPath));
-
-// ─── Start server ───────────────────────────────────────────
+// Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
-  console.log(`Server listening on http://localhost:${PORT}`)
+  console.log(`🚀 Express running at http://localhost:${PORT}`)
 );
