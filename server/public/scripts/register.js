@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup 
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { app } from "./firebase.js";
@@ -15,6 +16,7 @@ const loginBtn = document.querySelector('.login-btn');
 const jsRegisterBtn = document.querySelector('.js-register-btn');
 const jsLoginBtn = document.querySelector('.js-login-btn');
 const googleBtn = document.querySelectorAll('.bxl-google');
+const facebookBtn = document.querySelectorAll('.bxl-facebook');
 
 
 registerBtn.addEventListener('click', () => {
@@ -126,4 +128,28 @@ googleBtn.forEach((btn) => {
     }
   });
 });
+
+// facebook-login
+facebookBtn.forEach((btn) => {
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const facebookProvider = new FacebookAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, facebookProvider);
+      const user = result.user;
+
+      console.log("✅ Facebook Login successful!");
+      console.log("User ID:", user.uid);
+      console.log("User Email:", user.email);
+
+      alert(`Welcome, ${user.displayName || user.email}!`);
+    } catch (error) {
+      console.error("❌ Facebook Login error:", error.code, error.message);
+      alert("Facebook login failed: " + error.message);
+    }
+  });
+});
+
 
