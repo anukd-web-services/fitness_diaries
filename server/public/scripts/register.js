@@ -95,10 +95,15 @@ jsLoginBtn.addEventListener("click", (e) => {
     .catch((error) => {
       console.error("❌ Login error:", error.code, error.message);
 
+     // ✅ CHANGE HERE: Custom error messages
       if (error.code === "auth/invalid-login-credentials") {
         errorMessage.textContent = "User not found or wrong password. Please try again.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage.textContent = "Invalid email.";
+      } else if (error.code === "auth/user-not-found") {
+        errorMessage.textContent = "No account found with this email.";
       } else {
-        errorMessage.textContent = "Login failed: " + error.message;
+        errorMessage.textContent = "Login failed. " + error.message;
       }
 
       errorMessage.style.display = 'block';
