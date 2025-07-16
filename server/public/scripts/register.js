@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   FacebookAuthProvider,
+  OAuthProvider,
+  signInAnonymously,    
   signInWithPopup 
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { app } from "./firebase.js";
@@ -17,6 +19,8 @@ const jsRegisterBtn = document.querySelector('.js-register-btn');
 const jsLoginBtn = document.querySelector('.js-login-btn');
 const googleBtn = document.querySelectorAll('.bxl-google');
 const facebookBtn = document.querySelectorAll('.bxl-facebook');
+const twitterBtn = document.querySelectorAll('.bxl-twitter');
+const guestBtn = document.querySelectorAll('.bxs-user');
 
 
 registerBtn.addEventListener('click', () => {
@@ -28,7 +32,7 @@ loginBtn.addEventListener('click', () => {
 });
 
 
-// Register user 
+//Register-user 
 jsRegisterBtn.addEventListener("click", (e) => {
   e.preventDefault();
  
@@ -58,7 +62,7 @@ jsRegisterBtn.addEventListener("click", (e) => {
     });
 });
 
-// Login user
+//Login-user
 jsLoginBtn.addEventListener("click", (e) => {
   e.preventDefault();
   console.log("Login button clicked.");
@@ -90,12 +94,11 @@ jsLoginBtn.addEventListener("click", (e) => {
       console.log("✅ Login successful!");
       console.log("User ID:", user.uid);
       console.log("User Email:", user.email);
-      errorMessage.style.display = 'none'; // Clear any old error
+      errorMessage.style.display = 'none';
     })
     .catch((error) => {
       console.error("❌ Login error:", error.code, error.message);
 
-     // ✅ CHANGE HERE: Custom error messages
       if (error.code === "auth/invalid-login-credentials") {
         errorMessage.textContent = "User not found or wrong password. Please try again.";
       } else if (error.code === "auth/invalid-email") {
@@ -111,7 +114,7 @@ jsLoginBtn.addEventListener("click", (e) => {
 });
 
 
-//google-login
+//Google-login
 googleBtn.forEach((btn) => {
   btn.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -134,7 +137,8 @@ googleBtn.forEach((btn) => {
   });
 });
 
-// facebook-login
+
+//Facebook-login
 facebookBtn.forEach((btn) => {
   btn.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -158,3 +162,48 @@ facebookBtn.forEach((btn) => {
 });
 
 
+//Twitter-login
+twitterBtn.forEach((btn) => {
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const twitterProvider = new OAuthProvider('twitter.com');
+
+    try {
+      const result = await signInWithPopup(auth, twitterProvider);
+      const user = result.user;
+
+      console.log("✅ Twitter Login successful!");
+      console.log("User ID:", user.uid);
+      console.log("User Name:", user.displayName);
+      console.log("User Email:", user.email);
+      console.log("User Photo:", user.photoURL);
+
+      alert(`Welcome, ${user.displayName || "Twitter User"}!`);
+    } catch (error) {
+      console.error("❌ Twitter Login error:", error.code, error.message);
+      alert("Twitter login failed: " + error.message);
+    }
+  });
+});
+
+
+//Guest-login
+guestBtn.forEach((btn) => {
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    try {
+      const result = await signInAnonymously(auth);
+      const user = result.user;
+
+      console.log("✅ Guest Login successful!");
+      console.log("User ID:", user.uid);
+
+      alert("Welcome, Guest! You're now using the app anonymously.");
+    } catch (error) {
+      console.error("❌ Guest Login error:", error.code, error.message);
+      alert("Guest login failed: " + error.message);
+    }
+  });
+});
