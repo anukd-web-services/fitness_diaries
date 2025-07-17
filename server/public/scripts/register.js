@@ -2,6 +2,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   GoogleAuthProvider,
   FacebookAuthProvider,
   OAuthProvider,
@@ -21,6 +22,7 @@ const googleBtn = document.querySelectorAll('.bxl-google');
 const facebookBtn = document.querySelectorAll('.bxl-facebook');
 const twitterBtn = document.querySelectorAll('.bxl-twitter');
 const guestBtn = document.querySelectorAll('.bxs-user');
+const forgotPasswordLink = document.querySelector('.forgot-link a');
 
 
 registerBtn.addEventListener('click', () => {
@@ -113,7 +115,6 @@ jsLoginBtn.addEventListener("click", (e) => {
     });
 });
 
-
 //Google-login
 googleBtn.forEach((btn) => {
   btn.addEventListener('click', async (e) => {
@@ -205,5 +206,27 @@ guestBtn.forEach((btn) => {
       console.error("❌ Guest Login error:", error.code, error.message);
       alert("Guest login failed: " + error.message);
     }
+  });
+});
+
+//Forgot-password
+forgotPasswordLink.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const emailInput = document.querySelector('.form-box.login input[type="email"]');
+  const email = emailInput.value.trim();
+
+  if (!email) {
+    alert("Please enter your email first.");
+    return;
+  }
+
+ sendPasswordResetEmail(auth, email)
+  .then(() => {
+    alert("If this email is registered, a password reset link has been sent.");
+  })
+  .catch((error) => {
+    console.error("Reset error:", error.message);
+    alert("Error: " + error.message);
   });
 });
