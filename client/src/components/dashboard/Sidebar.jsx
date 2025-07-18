@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "../../styles/sidebar.css";
 
 //Menu Configuration
-export default function Sidebar(isCollapsed, onProfileClick) {
+export default function Sidebar({ isCollapsed, onProfileClick }) {
   const menuItems = [
     {
       label: "Dashboard",
@@ -26,15 +26,16 @@ export default function Sidebar(isCollapsed, onProfileClick) {
     >
       <h5 className="text-center mb-4">{!isCollapsed && "Your Dashboard"}</h5>
       <ul className="nav nav-pills flex-column">
-        {menuItems.map((item, index) => {
+        {menuItems.map((item, index) => (
           <React.Fragment key={index}>
             <li className="nav-item mb-2">
-              {item.onClick ? (
+              {item.onclick ? (
                 <button
                   className="btn text-white nav-link"
                   onClick={item.onclick}
                 >
                   <i className={`bi ${item.icon} me-2`}></i>
+                  {!isCollapsed && item.label}
                 </button>
               ) : (
                 <a
@@ -46,17 +47,17 @@ export default function Sidebar(isCollapsed, onProfileClick) {
                 </a>
               )}
               {!isCollapsed &&
-                item.subItems?.map((sub, subIndex) => {
-                  <li className="nav nav-tems ms-4 mb-1" key={subIndex}>
-                    <a href="{sub.href}" className="nav-link text-white small">
+                item.subItems?.map((sub, subIndex) => (
+                  <li className="nav nav-item ms-4 mb-1" key={subIndex}>
+                    <a href={sub.href} className="nav-link text-white small">
                       <i className={`bi ${sub.icon} me-2`}></i>
                       {sub.label}
                     </a>
-                  </li>;
-                })}
+                  </li>
+                ))}
             </li>
-          </React.Fragment>;
-        })}
+          </React.Fragment>
+        ))}
       </ul>
     </div>
   );
