@@ -36,15 +36,15 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", authRoutes);
 app.use("/api/exercises", exerciseRoutes);
 
-// React frontend handling
+// === Static React Frontend ===
 if (isProd) {
-  // Serve built static files in production
   app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  });
+
+  app.get("*", (_req, res) =>
+    res.sendFile(path.join(__dirname, "../client/build/index.html"))
+  );
 } else {
-  // Proxy to CRA dev server in development
+  // Only for local dev: proxy CRA
   app.use(
     "/",
     createProxyMiddleware({
@@ -56,7 +56,7 @@ if (isProd) {
   );
 }
 
-// Start server
+// === Listen on correct port ===
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
   console.log(`🚀 Express running at http://localhost:${PORT}`)
