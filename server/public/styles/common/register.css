@@ -18,8 +18,8 @@ body {
 
 .header {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 6px;
+  left: 15px;
   display: flex;
   z-index: 999;
 }
