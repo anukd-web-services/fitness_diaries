@@ -34,4 +34,5 @@
     "build": "cd client && npm install && npm run build",
     "start": " node server/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
-}}
+  }
+}
