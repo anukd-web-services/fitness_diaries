@@ -8,4 +8,8 @@ export default function SidebarToggle() {
   const handleToggleSidebar = () => {
     setIsCollapsed((prev) => !prev);
   };
+
+  const handleProfileClick = () => {
+    setShowProfile(true);
+  };
 }

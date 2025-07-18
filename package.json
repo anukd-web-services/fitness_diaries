@@ -28,12 +28,12 @@
     "http-proxy-middleware": "^3.0.5",
     "mongoose": "^8.1.0"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server/server.js",
-    "client": "npm start --prefix client",
-    "build": "cd client && npm install && npm run build",
-    "start": "npm run build && node server/server.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-  }
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "server": "nodemon server/server.js",
+  "client": "npm start --prefix client",
+  "build": "cd client && npm install && npm run build",
+  "start": "node server/server.js",
+  "dev": "concurrently \"npm run server\" \"npm run client\""
+}
 }
