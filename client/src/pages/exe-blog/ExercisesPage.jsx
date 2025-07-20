@@ -18,7 +18,7 @@ const ExercisesPage = () => {
 
     fetchExercises();
   }, []);
-        
+
   return (
     <div className="exercise-grid">
       {exercises.map((exercise) => (
