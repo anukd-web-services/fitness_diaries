@@ -34,7 +34,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // API routes
 app.use("/auth", authRoutes);
-app.use("/api/exercises", exerciseRoutes);
+app.use("/exercises", exerciseRoutes); // This is correct now
+
+
 
 // === Static React Frontend ===
 if (isProd) {

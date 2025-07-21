@@ -5,9 +5,12 @@ const exerciseSchema = new mongoose.Schema({
   description: String,
   difficulty: String,
   duration: Number,
-  calories: Number,
-  imageUrl: String
+  category: String,     
+  bodyPart: String,     
+  imageUrl: String,
+  calories: Number
 });
+
 
 const Exercise = mongoose.model("Exercise", exerciseSchema);
 module.exports = Exercise;
