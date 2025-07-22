@@ -6,7 +6,10 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 const connectDB = require("./config/db");
 const session = require("./config/cookieSession");
 const authRoutes = require("./routes/authRoutes");
-const exerciseRoutes = require("./routes/exerciseRoutes");
+const cors = require("cors");
+
+
+
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
@@ -20,6 +23,7 @@ connectDB();
 app.use(session);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // EJS
 const ejsMate = require("ejs-mate");
@@ -30,9 +34,23 @@ app.set("views", path.join(__dirname, "views"));
 // Public assets
 app.use(express.static(path.join(__dirname, "public")));
 
+// Route imports
+const upperBody = require('./routes/ExerciseRoutes/upperBody');
+const lowerBody = require('./routes/ExerciseRoutes/lowerBody');
+const core = require('./routes/ExerciseRoutes/core');
+const cardio = require('./routes/ExerciseRoutes/cardio');
+const fullBody = require('./routes/ExerciseRoutes/fullBody');
+
+
+app.use('/upperbody', upperBody);
+app.use('/lowerbody', lowerBody);
+app.use('/core', core);
+app.use('/cardio', cardio);
+app.use('/fullbody', fullBody);
+
 // API routes
 app.use("/auth", authRoutes);
-app.use("/exercises", exerciseRoutes); // This is correct now
+
 
 
 

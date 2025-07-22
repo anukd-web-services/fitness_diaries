@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "cookie-session": "^2.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.0.0",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
@@ -28,12 +29,12 @@
     "http-proxy-middleware": "^3.0.5",
     "mongoose": "^8.1.0"
   },
-"scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "server": "nodemon server/server.js",
-  "client": "npm start --prefix client",
-  "build": "cd client && npm install && npm run build",
-  "start": "node server/server.js",
-  "dev": "concurrently \"npm run server\" \"npm run client\""
-}
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "build": "cd client && npm install && npm run build",
+    "start": "node server/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  }
 }
