@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/anukd-web-services/fitness_diaries.git"
   },
+  "engines": {
+  "node": "22.x"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
