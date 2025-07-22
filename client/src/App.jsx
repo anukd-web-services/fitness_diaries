@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ExercisesPage from "./pages/exe-blog/ExercisesPage";
 import ExerciseCategories from "./pages/exe-blog/ExerciseCategories";
 import DashboardLayout from "./pages/users/DashboardLayout";
+import About from "./components/about/About.jsx";
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         <Route path="/exercises" element={<ExercisesPage />} />
         {/* Dashboard route – shows collapsible sidebar */}
         <Route path="/dashboard" element={<DashboardLayout />} />
+        <Route path="/about" element={<About/>} />
       </Routes>
     </Router>
   );
