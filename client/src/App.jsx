@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ExerciseCategories from "./pages/exe-blog/ExerciseCategories";
 import DashboardLayout from "./pages/users/DashboardLayout";
+import About from "./components/about/About.jsx";
+
 
 import UpperBodyPage from "./pages/exe-blog/UpperBodyPage";
 import LowerBodyPage from "./pages/exe-blog/LowerBodyPage";
@@ -22,6 +24,7 @@ function App() {
         <Route path="/cardio" element={<CardioPage />} />
         <Route path="/core" element={<CorePage />} />
         <Route path="/fullbody" element={<FullBodyPage />} />
+        <Route path="/about" element={<About/>} />
       </Routes>
     </Router>
   );

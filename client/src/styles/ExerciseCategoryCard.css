@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
+  z-index: 99999;
 }
 
 .exercise-card:hover {

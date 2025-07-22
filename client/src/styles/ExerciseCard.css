@@ -16,6 +16,7 @@ body {
   flex-direction:row;
   gap: 20px;
   padding: 20px;
+  z-index: 99999;
 }
 
 .exercise-card .card-image img {
@@ -143,7 +144,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: 20px;
   padding: 20px;
- align-items: center; 
+  align-items: center; 
   flex-direction: column;
 }
 
