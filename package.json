@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/anukd-web-services/fitness_diaries.git"
   },
+  "engines": {
+  "node": "22.17.1"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,6 +23,7 @@
   },
   "dependencies": {
     "cookie-session": "^2.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.0.0",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
@@ -29,11 +33,11 @@
     "mongoose": "^8.1.0"
   },
 "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "server": "nodemon server/server.js",
   "client": "npm start --prefix client",
+  "server": "nodemon server/server.js",
   "build": "cd client && npm install && npm run build",
-  "start": "node server/server.js",
+  "start": "node server/server.js",          
+  "start:prod": "npm run build && npm start",  
   "dev": "concurrently \"npm run server\" \"npm run client\""
 }
 }
